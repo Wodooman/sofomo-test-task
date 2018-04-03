@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 import { ISurfingTrick } from '../Interfaces/ISurfingTrick';
 import { ISurfingTrickModel, SurfingTrick } from '../models/SurfingTrick';
 
-export async function getAllSurfingTricks(): Promise<Array<ISurfingTrickModel>> {
+export async function getAllSurfingTricks(complexity?: string): Promise<Array<ISurfingTrickModel>> {
     checkDbConnection();
 
-    let result = await SurfingTrick.find().exec();
+    let query = complexity && complexity !== 'All' ? {complexity : complexity} : {};
+    let result = await SurfingTrick.find(query).exec();
     return result;
 }
 

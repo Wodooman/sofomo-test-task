@@ -51,6 +51,39 @@ SurfingController.get('/api/surfingTricks', async (req: Request, res: Response):
 
 /**
  * @swagger
+ * /api/surfingTricks/{complexity}:
+ *   get:
+ *     tags:
+ *       - SurfingTricks
+ *     description: Returns all Surfing Tricks
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: complexity
+ *         description: Complexity
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: An array of Surfing Tricks
+ *         schema:
+ *           $ref: '#/definitions/SurfingTrick'
+ *       500:
+ *         description: Internal server error
+ */
+SurfingController.get('/api/surfingTricks/:complexity', async (req: Request, res: Response): Promise<void> => {
+    try {
+        let tricks = await DalService.getAllSurfingTricks(req.params.complexity as string);
+        res.send(tricks);
+    } catch (err) {
+        res.status(500);
+        res.send(err.message);
+    }
+});
+
+/**
+ * @swagger
  * /api/surfingTricks:
  *   post:
  *     tags:
@@ -84,7 +117,7 @@ SurfingController.post('/api/surfingTricks', async (req: Request, res: Response)
 
 /**
  * @swagger
- * /api/surfingTricks/{trickName}:
+ * /api/surfingTricks/details/{trickName}:
  *   get:
  *     tags:
  *       - SurfingTricks
@@ -105,7 +138,7 @@ SurfingController.post('/api/surfingTricks', async (req: Request, res: Response)
   *       500:
  *         description: Internal server error
  */
-SurfingController.get('/api/surfingTricks/:trickName',  async (req: Request, res: Response): Promise<void> => {
+SurfingController.get('/api/surfingTricks/details/:trickName',  async (req: Request, res: Response): Promise<void> => {
     try {
         let result = await DalService.getSurfingTrickByName(req.params.trickName as string);
         res.send(result);
