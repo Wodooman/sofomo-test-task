@@ -3,5 +3,5 @@
 ## Used technologies
 
 * DB - MongoDB
-* Backend - Node.js
+* Backend - Node.js, API documentation - Swagger
 * Frontend - React
