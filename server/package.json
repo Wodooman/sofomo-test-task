@@ -1,0 +1,47 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for test project",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node ./dist/server.js",
+    "test": "test",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wodooman/sofomo-test-task.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "api",
+    "test",
+    "typescript"
+  ],
+  "author": "Volodymyr Dubenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wodooman/sofomo-test-task/issues"
+  },
+  "homepage": "https://github.com/Wodooman/sofomo-test-task#readme",
+  "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/log4js": "^2.3.5",
+    "@types/mongoose": "^5.0.7",
+    "@types/node": "^9.6.1",
+    "@types/swagger-jsdoc": "0.0.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.2",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "log4js": "^2.5.3",
+    "mongoose": "^5.0.12",
+    "swagger-jsdoc": "^1.9.7"
+  }
+}
