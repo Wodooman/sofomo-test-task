@@ -35,3 +35,9 @@ npm start
 ```
 
 Navigate to [http://localhost:3001/api/surfingTricks](http://localhost:3001/api/surfingTricks)
+
+## Testing
+
+```
+npm test
+```

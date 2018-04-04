@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import * as ApiService from '../services/ApiService';
 import SurfingTrick from '../models/SurfingTrick';
+import AlertDialog from './common/AlertDialog';
 
 interface ITrickDetailsPageProps {
     match: {
@@ -15,6 +16,8 @@ interface ITrickDetailsPageProps {
 interface ITrickDetailsPageState {
     isLoading: boolean;
     trick: SurfingTrick | null;
+    showErrorDialog: boolean;
+    errorMessage: string | null;
 }
 
 class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDetailsPageState> {
@@ -22,20 +25,38 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
         super(props);
         this.state = {
             isLoading: true,
-            trick: null
+            trick: null,
+            errorMessage: null,
+            showErrorDialog: false
         };
     }
 
     async componentDidMount() {
-        let trick = await ApiService.getTrickByName(this.props.match.params.name);
-        this.setState({
-            isLoading: false,
-            trick: trick
-          }
-        );
+        try {
+            let trick = await ApiService.getTrickByName(this.props.match.params.name);
+            this.setState({
+                isLoading: false,
+                trick: trick
+              }
+            );
+        } catch (err) { 
+            this.setState(Object.assign({}, this.state, {
+                showErrorDialog: true,
+                errorMessage: err.message,
+                isLoading: false
+              }));
+        }
     }
 
     render() {
+        let embededVideoAttributes = {
+            'width': '560',
+            'height': '315',
+            'frameborder': '0', 
+            'allow': 'autoplay; encrypted-media', 
+            'allowfullscreen': '1'
+        };
+
         if (this.state.isLoading) {
             return (
                 <div>
@@ -64,19 +85,28 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
                         <TableRow>
                             <TableCell>Example 1:</TableCell>
                             <TableCell>{this.state.trick ? 
-                            <a href={this.state.trick.youTubeLinkExample1} target="_blank">
-                                    {this.state.trick.youTubeLinkExample1}</a> : ''}</TableCell>
+                                <iframe 
+                                    {...embededVideoAttributes}
+                                    src={this.state.trick.youTubeLinkExample1.replace('/watch?v=', '/embed/')} 
+                                />
+                                : ''}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Example 2:</TableCell>
                             <TableCell>{this.state.trick ? 
-                            <a href={this.state.trick.youTubeLinkExample2} target="_blank">
-                                    {this.state.trick.youTubeLinkExample2}</a> : ''}</TableCell>
+                                <iframe 
+                                    {...embededVideoAttributes}
+                                    src={this.state.trick.youTubeLinkExample2.replace('/watch?v=', '/embed/')} 
+                                />
+                                : ''}
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br/>
                 <Link to={'/'}>Back</Link>
+                <AlertDialog isOpen={this.state.showErrorDialog} warningText={this.state.errorMessage} />
             </div>
         );
     }

@@ -6,8 +6,7 @@ export function getAllTricks(complexity?: string): Promise<Array<SurfingTrick>> 
         fetch(`/api/surfingTricks${complexity ? '/' + complexity : ''}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Error while accessing API. Details: (
-                        ${response.status})${response.statusText}`);
+                    throw new Error('Error while accessing API.');
                 } else {
                     return response.json();
                 }
@@ -28,8 +27,7 @@ export function getTrickByName(name: string): Promise<SurfingTrick> {
         fetch(`/api/surfingTricks/details/${name}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Error while accessing API. Details: (
-                        ${response.status})${response.statusText}`);
+                    throw new Error('Error while accessing API.');
                 } else {
                     return response.json();
                 }
