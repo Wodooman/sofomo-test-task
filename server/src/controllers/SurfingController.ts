@@ -39,13 +39,12 @@ const SurfingController = express.Router();
  *       500:
  *         description: Internal server error
  */
-SurfingController.get('/api/surfingTricks', async (req: Request, res: Response): Promise<void> => {
+SurfingController.get('/api/surfingTricks', async (req: Request, res: Response, next: any): Promise<void> => {
     try {
         let tricks = await DalService.getAllSurfingTricks();
         res.send(tricks);
     } catch (err) {
-        res.status(500);
-        res.send(err.message);
+        next(err);
     }
 });
 
@@ -72,13 +71,12 @@ SurfingController.get('/api/surfingTricks', async (req: Request, res: Response):
  *       500:
  *         description: Internal server error
  */
-SurfingController.get('/api/surfingTricks/:complexity', async (req: Request, res: Response): Promise<void> => {
+SurfingController.get('/api/surfingTricks/:complexity', async (req: Request, res: Response, next: any): Promise<void> => {
     try {
         let tricks = await DalService.getAllSurfingTricks(req.params.complexity as string);
         res.send(tricks);
     } catch (err) {
-        res.status(500);
-        res.send(err.message);
+        next(err);
     }
 });
 
@@ -104,14 +102,13 @@ SurfingController.get('/api/surfingTricks/:complexity', async (req: Request, res
  *       500:
  *         description: Internal server error
  */
-SurfingController.post('/api/surfingTricks', async (req: Request, res: Response): Promise<void> => {
+SurfingController.post('/api/surfingTricks', async (req: Request, res: Response, next: any): Promise<void> => {
     try {
         let result = await DalService.createNewTrick(req.body as ISurfingTrick);
         res.status(201);
         res.send(result);
     } catch (err) {
-        res.status(500);
-        res.send(err.message);
+        next(err);
     }
 });
 
@@ -138,13 +135,12 @@ SurfingController.post('/api/surfingTricks', async (req: Request, res: Response)
   *       500:
  *         description: Internal server error
  */
-SurfingController.get('/api/surfingTricks/details/:trickName',  async (req: Request, res: Response): Promise<void> => {
+SurfingController.get('/api/surfingTricks/details/:trickName',  async (req: Request, res: Response, next: any): Promise<void> => {
     try {
         let result = await DalService.getSurfingTrickByName(req.params.trickName as string);
         res.send(result);
     } catch (err) {
-        res.status(500);
-        res.send(err.message);
+        next(err);
     }
   });
 

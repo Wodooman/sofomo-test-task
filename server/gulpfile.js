@@ -22,9 +22,4 @@ gulp.task('copy-public', function () {
         .pipe(gulp.dest('dist/public'));
 });
 
-gulp.task('copy-configs', function () {
-    return gulp.src(['config/**/*'])
-        .pipe(gulp.dest('dist/config'));
-});
-
-gulp.task("default", gulp.series('clean', 'build', 'copy-public', 'copy-configs'));
+gulp.task("default", gulp.series('clean', 'build', 'copy-public'));

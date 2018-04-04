@@ -63,14 +63,19 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
                         </TableRow>
                         <TableRow>
                             <TableCell>Example 1:</TableCell>
-                            <TableCell>{this.state.trick ? this.state.trick.youTubeLinkExample1 : ''}</TableCell>
+                            <TableCell>{this.state.trick ? 
+                            <a href={this.state.trick.youTubeLinkExample1} target="_blank">
+                                    {this.state.trick.youTubeLinkExample1}</a> : ''}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Example 2:</TableCell>
-                            <TableCell>{this.state.trick ? this.state.trick.youTubeLinkExample2 : ''}</TableCell>
+                            <TableCell>{this.state.trick ? 
+                            <a href={this.state.trick.youTubeLinkExample2} target="_blank">
+                                    {this.state.trick.youTubeLinkExample2}</a> : ''}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
+                <br/>
                 <Link to={'/'}>Back</Link>
             </div>
         );

@@ -1,0 +1,6 @@
+{
+    "config": {
+        "dbConnectionString": "mongodb://localhost:27017/sofomoTestDb",
+        "hostingPort": 3001
+    }
+}
