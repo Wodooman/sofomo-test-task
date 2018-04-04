@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import * as ApiService from '../services/ApiService';
 import SurfingTrick from '../models/SurfingTrick';
+import AlertDialog from './common/AlertDialog';
 
 interface ITrickDetailsPageProps {
     match: {
@@ -15,6 +16,8 @@ interface ITrickDetailsPageProps {
 interface ITrickDetailsPageState {
     isLoading: boolean;
     trick: SurfingTrick | null;
+    showErrorDialog: boolean;
+    errorMessage: string | null;
 }
 
 class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDetailsPageState> {
@@ -22,17 +25,27 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
         super(props);
         this.state = {
             isLoading: true,
-            trick: null
+            trick: null,
+            errorMessage: null,
+            showErrorDialog: false
         };
     }
 
     async componentDidMount() {
-        let trick = await ApiService.getTrickByName(this.props.match.params.name);
-        this.setState({
-            isLoading: false,
-            trick: trick
-          }
-        );
+        try {
+            let trick = await ApiService.getTrickByName(this.props.match.params.name);
+            this.setState({
+                isLoading: false,
+                trick: trick
+              }
+            );
+        } catch (err) { 
+            this.setState(Object.assign({}, this.state, {
+                showErrorDialog: true,
+                errorMessage: err.message,
+                isLoading: false
+              }));
+        }
     }
 
     render() {
@@ -77,6 +90,7 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
                 </Table>
                 <br/>
                 <Link to={'/'}>Back</Link>
+                <AlertDialog isOpen={this.state.showErrorDialog} warningText={this.state.errorMessage} />
             </div>
         );
     }

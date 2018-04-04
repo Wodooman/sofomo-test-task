@@ -6,6 +6,7 @@ import { MenuItem } from 'material-ui/Menu';
 
 import * as ApiService from '../services/ApiService';
 import SurfingTrick from '../models/SurfingTrick';
+import AlertDialog from './common/AlertDialog';
 
 interface ITrickListPageProps {
 }
@@ -13,6 +14,8 @@ interface ITrickListPageState {
     isLoading: boolean;
     tricks: Array<SurfingTrick>;
     filter: string;
+    showErrorDialog: boolean;
+    errorMessage: string | null;
 }
 
 class TrickListPage extends React.Component<ITrickListPageProps, ITrickListPageState> {
@@ -22,7 +25,9 @@ class TrickListPage extends React.Component<ITrickListPageProps, ITrickListPageS
         this.state = {
             isLoading: true,
             tricks: [],
-            filter: 'All'
+            filter: 'All',
+            errorMessage: null,
+            showErrorDialog: false
         };
         this.handleFilter = this.handleFilterChange.bind(this);
     }
@@ -32,11 +37,19 @@ class TrickListPage extends React.Component<ITrickListPageProps, ITrickListPageS
     }
 
     async getTricks(complexity?: string) {
-        let tricks = await ApiService.getAllTricks(complexity);
-        this.setState(Object.assign({}, this.state, {
-            isLoading: false,
-            tricks: tricks
-          }));
+        try {
+            let tricks = await ApiService.getAllTricks(complexity);
+            this.setState(Object.assign({}, this.state, {
+                isLoading: false,
+                tricks: tricks
+            }));
+        } catch (err) { 
+            this.setState(Object.assign({}, this.state, {
+                showErrorDialog: true,
+                errorMessage: err.message,
+                isLoading: false
+              }));
+        }
     }
 
     async handleFilterChange(event: any) {
@@ -113,6 +126,7 @@ class TrickListPage extends React.Component<ITrickListPageProps, ITrickListPageS
                         ))}
                     </TableBody>
                 </Table>
+                <AlertDialog isOpen={this.state.showErrorDialog} warningText={this.state.errorMessage} />
             </div>
         );
     }

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import { ISurfingTrick } from '../Interfaces/ISurfingTrick';
 import { ISurfingTrickModel, SurfingTrick } from '../models/SurfingTrick';
 
@@ -28,7 +28,7 @@ export async function getSurfingTrickByName(name: string): Promise<ISurfingTrick
     return result;
 }
 
-function checkDbConnection() {
+export function checkDbConnection() {
     if (mongoose.connection.readyState !== 1) {
         throw new Error('Database is not reachable');
     }
