@@ -100,11 +100,13 @@ class TrickListPage extends React.Component<ITrickListPageProps, ITrickListPageS
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.complexity}</TableCell>
                                 <TableCell>{row.requiredSpeed}</TableCell>
-                                <TableCell>{row.youTubeLinkExample1}</TableCell>
-                                <TableCell>{row.youTubeLinkExample2}</TableCell>
+                                <TableCell><a href={row.youTubeLinkExample1} target="_blank">
+                                    {row.youTubeLinkExample1}</a></TableCell>
+                                <TableCell><a href={row.youTubeLinkExample2} target="_blank">
+                                    {row.youTubeLinkExample2}</a></TableCell>
                                 <TableCell>
                                     <Link to={`/tricks/view/${row.name}`}>
-                                        View
+                                        View Details
                                     </Link>
                                 </TableCell>
                             </TableRow>

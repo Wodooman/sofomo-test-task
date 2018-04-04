@@ -33,3 +33,38 @@
     "complexity": "Complex",
     "requiredSpeed": "Fast"
 }
+{
+    "name":"Harness Use",
+    "youTubeLinkExample1": "https://www.youtube.com/watch?v=BhWBvFAI99A",
+    "youTubeLinkExample2": "https://www.youtube.com/watch?v=yfTNYs1mBPg",
+    "complexity": "Medium",
+    "requiredSpeed": "Medium"
+}
+{
+    "name":"Non Planing Gybe",
+    "youTubeLinkExample1": "https://www.youtube.com/watch?v=jHhiaW9Iwc4",
+    "youTubeLinkExample2": "https://www.youtube.com/watch?v=KXjq9cpHrU4",
+    "complexity": "Medium",
+    "requiredSpeed": "Medium"
+}
+{
+    "name":"Forward Loop",
+    "youTubeLinkExample1": "https://www.youtube.com/watch?v=SCvhi7aE4MQ",
+    "youTubeLinkExample2": "https://www.youtube.com/watch?v=Jv3vXQ480rE",
+    "complexity": "Complex",
+    "requiredSpeed": "Fast"
+}
+{
+    "name":"Flaka",
+    "youTubeLinkExample1": "https://www.youtube.com/watch?v=jeSiLUqr7KA",
+    "youTubeLinkExample2": "https://www.youtube.com/watch?v=0n7hR4dclhY",
+    "complexity": "Complex",
+    "requiredSpeed": "Fast"
+}
+{
+    "name":"Vulcan",
+    "youTubeLinkExample1": "https://www.youtube.com/watch?v=1EVWzf9Lh6Q",
+    "youTubeLinkExample2": "https://www.youtube.com/watch?v=7xnwE0aWFSI",
+    "complexity": "Complex",
+    "requiredSpeed": "Fast"
+}

@@ -19,7 +19,7 @@
             "runtimeArgs": [
                 "--nolazy"
             ],
-            "program": "${workspaceRoot}\\src\\server.ts",
+            "program": "${workspaceRoot}\\src\\Server.ts",
             "sourceMaps": true,
             "outFiles": [
                 "${workspaceRoot}/dist/**/*.js"
