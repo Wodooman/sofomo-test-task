@@ -10,3 +10,8 @@
 
 * server - folder with backend project
 * web-client - frontend project
+
+## Preparation
+
+* Install & Start MongoDB on default port (27017)
+* Run "PrepareAndStartApp.bat" for restoring DB and starting server with web client

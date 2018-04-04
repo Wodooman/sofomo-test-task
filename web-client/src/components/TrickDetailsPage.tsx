@@ -49,6 +49,14 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
     }
 
     render() {
+        let embededVideoAttributes = {
+            'width': '560',
+            'height': '315',
+            'frameborder': '0', 
+            'allow': 'autoplay; encrypted-media', 
+            'allowfullscreen': '1'
+        };
+
         if (this.state.isLoading) {
             return (
                 <div>
@@ -77,14 +85,22 @@ class TrickDetailsPage extends React.Component<ITrickDetailsPageProps, ITrickDet
                         <TableRow>
                             <TableCell>Example 1:</TableCell>
                             <TableCell>{this.state.trick ? 
-                            <a href={this.state.trick.youTubeLinkExample1} target="_blank">
-                                    {this.state.trick.youTubeLinkExample1}</a> : ''}</TableCell>
+                                <iframe 
+                                    {...embededVideoAttributes}
+                                    src={this.state.trick.youTubeLinkExample1.replace('/watch?v=', '/embed/')} 
+                                />
+                                : ''}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Example 2:</TableCell>
                             <TableCell>{this.state.trick ? 
-                            <a href={this.state.trick.youTubeLinkExample2} target="_blank">
-                                    {this.state.trick.youTubeLinkExample2}</a> : ''}</TableCell>
+                                <iframe 
+                                    {...embededVideoAttributes}
+                                    src={this.state.trick.youTubeLinkExample2.replace('/watch?v=', '/embed/')} 
+                                />
+                                : ''}
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
